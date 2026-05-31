@@ -8,14 +8,14 @@ This demo runs two AutoGen tasks:
 ## Run all demos
 
 ```bash
-PYTHONPATH=src python -m agentic.run_demo --mode all
+python -m agentic.run_demo --mode all
 ```
 
 ## Run a single demo
 
 ```bash
-PYTHONPATH=src python -m agentic.run_demo --mode single
-PYTHONPATH=src python -m agentic.run_demo --mode multi
+python -m agentic.run_demo --mode single
+python -m agentic.run_demo --mode multi
 ```
 
 ## Output traces

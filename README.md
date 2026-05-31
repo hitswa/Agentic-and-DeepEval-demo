@@ -13,13 +13,13 @@ plan quality, step efficiency, and argument correctness).
 Run the demo tasks:
 
 ```bash
-PYTHONPATH=src python -m agentic.run_demo --mode all
+python -m agentic.run_demo --mode all
 ```
 
 Run DeepEval metrics:
 
 ```bash
-PYTHONPATH=src python -m evaluations.run_evals
+python -m evaluations.run_evals
 ```
 
 ## Project Layout

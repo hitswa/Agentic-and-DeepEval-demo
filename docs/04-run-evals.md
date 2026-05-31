@@ -10,7 +10,7 @@ This executes the agent and evaluates:
 - Plan Adherence
 
 ```bash
-PYTHONPATH=src python -m evaluations.run_evals
+python -m evaluations.run_evals
 ```
 
 ## 2) Tool metrics output

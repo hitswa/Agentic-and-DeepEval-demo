@@ -31,5 +31,5 @@ OPENAI_MODEL=gpt-4o-mini
 ## 4) Verify imports
 
 ```bash
-PYTHONPATH=src python -c "import autogen, deepeval; print('ok')"
+python -c "import autogen, deepeval; print('ok')"
 ```
