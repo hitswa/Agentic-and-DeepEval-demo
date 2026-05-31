@@ -26,6 +26,7 @@ python -m evaluations.run_evals
 
 - `src/agentic/` AutoGen agents, tools, and trace helpers.
 - `evaluations/` DeepEval evaluation scripts and fixtures.
+- `templates/` Standalone reference examples (AutoGen, tracing, DeepEval).
 - `docs/` Step-by-step documentation.
 
 ## Notes

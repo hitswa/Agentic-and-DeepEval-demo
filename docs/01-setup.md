@@ -5,7 +5,7 @@
 ```bash
 python -m venv .venv
 source .venv/bin/activate # for mac or linux
-# ./venv/bin/activate # for windows
+# .venv\Scripts\activate.bat # for windows
 ```
 
 ## 2) Install dependencies

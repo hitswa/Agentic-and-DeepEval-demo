@@ -7,6 +7,10 @@ Build a small Python project that runs one or more AutoGen-based agentic tasks a
 - Create a lightweight layout:
   - `src/` for agent implementation and task runners
   - `evaluations/` for DeepEval evaluation scripts
+  - `templates/` for standalone reference examples:
+    - `autogen.py` — minimal two-agent AutoGen conversation
+    - `tracing.py` — simple DeepEval `@observe` tracing example
+    - `deepeval.py` — simple `LLMTestCase` + metric evaluation example
   - `docs/` for step-by-step guides and metric explanations
   - `requirements.txt` (or `pyproject.toml`) for dependencies
   - `README.md` for quickstart
