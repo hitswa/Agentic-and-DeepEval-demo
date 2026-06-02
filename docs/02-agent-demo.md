@@ -7,15 +7,42 @@ This demo runs two AutoGen tasks:
 
 ## Run all demos
 
+**macOS / Linux**
+
 ```bash
-python -m agentic.run_demo --mode all
+PYTHONPATH=src python -m agentic.run_demo --mode all
+```
+
+**Windows (Command Prompt)**
+
+```cmd
+set PYTHONPATH=src && python -m agentic.run_demo --mode all
+```
+
+**Windows (PowerShell)**
+
+```powershell
+$env:PYTHONPATH="src"; python -m agentic.run_demo --mode all
 ```
 
 ## Run a single demo
 
+**macOS / Linux**
 ```bash
-python -m agentic.run_demo --mode single
-python -m agentic.run_demo --mode multi
+PYTHONPATH=src python -m agentic.run_demo --mode single
+PYTHONPATH=src python -m agentic.run_demo --mode multi
+```
+
+**Windows (Command Prompt)**
+```cmd
+set PYTHONPATH=src && python -m agentic.run_demo --mode single
+set PYTHONPATH=src && python -m agentic.run_demo --mode multi
+```
+
+**Windows (PowerShell)**
+```powershell
+$env:PYTHONPATH="src"; python -m agentic.run_demo --mode single
+$env:PYTHONPATH="src"; python -m agentic.run_demo --mode multi
 ```
 
 ## Output traces

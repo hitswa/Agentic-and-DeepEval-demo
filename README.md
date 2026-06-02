@@ -12,14 +12,36 @@ plan quality, step efficiency, and argument correctness).
 
 Run the demo tasks:
 
+**macOS / Linux**
 ```bash
-python -m agentic.run_demo --mode all
+PYTHONPATH=src python -m agentic.run_demo --mode all
+```
+
+**Windows (Command Prompt)**
+```cmd
+set PYTHONPATH=src && python -m agentic.run_demo --mode all
+```
+
+**Windows (PowerShell)**
+```powershell
+$env:PYTHONPATH="src"; python -m agentic.run_demo --mode all
 ```
 
 Run DeepEval metrics:
 
+**macOS / Linux**
 ```bash
-python -m evaluations.run_evals
+PYTHONPATH=src python -m evaluations.run_evals
+```
+
+**Windows (Command Prompt)**
+```cmd
+set PYTHONPATH=src && python -m evaluations.run_evals
+```
+
+**Windows (PowerShell)**
+```powershell
+$env:PYTHONPATH="src"; python -m evaluations.run_evals
 ```
 
 ## Project Layout

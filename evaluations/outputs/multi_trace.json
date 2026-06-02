@@ -1,0 +1,71 @@
+{
+  "task": "Call city_info with city Paris, then call budget_estimator with days=3 and daily_budget=200. Reply with a short summary that mentions the city highlight and the total budget.",
+  "plan": [
+    "Call city_info with the provided city.",
+    "Call budget_estimator with the provided days and daily budget.",
+    "Summarize results in one response."
+  ],
+  "steps": [
+    "Start multi-step task.",
+    "Tool:city_info input={'city': 'Paris'}",
+    "Tool:budget_estimator input={'days': 3, 'daily_budget': 200}",
+    "Tool:city_info input={'city': 'Paris'}",
+    "Responded with final answer."
+  ],
+  "output": "",
+  "expected_output": "Highlight: Louvre Museum. Total budget: 600.",
+  "tools_called": [
+    {
+      "name": "city_info",
+      "input_parameters": {
+        "city": "Paris"
+      },
+      "output": {
+        "country": "France",
+        "highlight": "Louvre Museum"
+      },
+      "description": "Return basic facts about a city."
+    },
+    {
+      "name": "budget_estimator",
+      "input_parameters": {
+        "days": 3,
+        "daily_budget": 200
+      },
+      "output": {
+        "total_budget": 600
+      },
+      "description": "Estimate a simple trip budget."
+    },
+    {
+      "name": "city_info",
+      "input_parameters": {
+        "city": "Paris"
+      },
+      "output": {
+        "country": "France",
+        "highlight": "Louvre Museum"
+      },
+      "description": "Return basic facts about a city."
+    }
+  ],
+  "expected_tools": [
+    {
+      "name": "city_info",
+      "input_parameters": {
+        "city": "Paris"
+      },
+      "output": null,
+      "description": "Return basic facts about a city."
+    },
+    {
+      "name": "budget_estimator",
+      "input_parameters": {
+        "days": 3,
+        "daily_budget": 200
+      },
+      "output": null,
+      "description": "Estimate a simple trip budget."
+    }
+  ]
+}

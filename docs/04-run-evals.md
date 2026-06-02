@@ -9,8 +9,19 @@ This executes the agent and evaluates:
 - Plan Quality
 - Plan Adherence
 
+**macOS / Linux**
 ```bash
-python -m evaluations.run_evals
+PYTHONPATH=src python -m evaluations.run_evals
+```
+
+**Windows (Command Prompt)**
+```cmd
+set PYTHONPATH=src && python -m evaluations.run_evals
+```
+
+**Windows (PowerShell)**
+```powershell
+$env:PYTHONPATH="src"; python -m evaluations.run_evals
 ```
 
 ## 2) Tool metrics output

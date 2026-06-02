@@ -1,0 +1,34 @@
+{
+  "task": "Use the calculator tool with expression '12 * 7 + 3' and reply with only the number.",
+  "plan": [
+    "Use calculator tool with the exact expression provided.",
+    "Return numeric answer only."
+  ],
+  "steps": [
+    "Start single-step task.",
+    "Tool:calculator input={'expression': '12 * 7 + 3'}",
+    "Responded with final answer."
+  ],
+  "output": "Please provide an expression or question for me to assist you with.",
+  "expected_output": "87",
+  "tools_called": [
+    {
+      "name": "calculator",
+      "input_parameters": {
+        "expression": "12 * 7 + 3"
+      },
+      "output": 87.0,
+      "description": "Evaluate a basic arithmetic expression."
+    }
+  ],
+  "expected_tools": [
+    {
+      "name": "calculator",
+      "input_parameters": {
+        "expression": "12 * 7 + 3"
+      },
+      "output": null,
+      "description": "Evaluate a basic arithmetic expression."
+    }
+  ]
+}
