@@ -80,8 +80,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-        print(f"Wrote {output_path}")
-
-
-if __name__ == "__main__":
-    main()

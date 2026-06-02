@@ -9,8 +9,19 @@ This executes the agent and evaluates:
 - Plan Quality
 - Plan Adherence
 
+**macOS / Linux**
 ```bash
-python -m evaluations.run_evals
+PYTHONPATH=src python -m evaluations.run_evals
+```
+
+**Windows (Command Prompt)**
+```cmd
+set PYTHONPATH=src && python -m evaluations.run_evals
+```
+
+**Windows (PowerShell)**
+```powershell
+$env:PYTHONPATH="src"; python -m evaluations.run_evals
 ```
 
 ## 2) Tool metrics output
@@ -30,5 +41,9 @@ Tool metrics for: Use the calculator tool with expression '12 * 7 + 3' ...
 
 ## Troubleshooting
 
-- Ensure `OPENAI_API_KEY` is set in `.env`.
+- Ensure Azure credentials are set in `.env`:
+  - `AZURE_OPENAI_API_KEY`
+  - `AZURE_OPENAI_ENDPOINT`
+  - `AZURE_OPENAI_DEPLOYMENT` (defaults to `gpt-4o-mini`)
+  - `AZURE_OPENAI_API_VERSION` (defaults to `2025-01-01-preview`)
 - If tool correctness fails, inspect `evaluations/outputs/*.json` to verify tool args.

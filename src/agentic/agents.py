@@ -109,6 +109,7 @@ def run_single_task(task: str, expected_output: Optional[str] = None) -> AgentRu
         name="user_proxy",
         human_input_mode="NEVER",
         max_consecutive_auto_reply=3,
+        code_execution_config={"use_docker": False},  # Disable Docker for simplicity in this demo
     )
 
     # Build the calculator tool bound to the current recorder, then register it
@@ -196,6 +197,7 @@ def run_multi_task(task: str, expected_output: Optional[str] = None) -> AgentRun
         name="user_proxy",
         human_input_mode="NEVER",
         max_consecutive_auto_reply=4,
+        code_execution_config={"use_docker": False},  # Disable Docker for simplicity in this demo
     )
 
     # Build both tools bound to the current recorder, then register them

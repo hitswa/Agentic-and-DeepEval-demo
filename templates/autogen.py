@@ -2,12 +2,23 @@
 # This file serves as a standalone reference example — it is NOT part of the
 # evaluation pipeline and does not use DeepEval tracing or tools.
 
+import os
+from dotenv import load_dotenv
 from autogen import AssistantAgent, UserProxyAgent
 
-# LLM configuration — replace api_key with a real key or load from environment
+load_dotenv()
+
+# LLM configuration for Azure OpenAI — values are loaded from the .env file
 llm_config = {
-    "model": "gpt-4o",
-    "api_key": "YOUR_API_KEY"
+    "config_list": [
+        {
+            "model": os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4o-mini"),
+            "api_key": os.getenv("AZURE_OPENAI_API_KEY"),
+            "base_url": os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/") + "/",
+            "api_type": "azure",
+            "api_version": os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview"),
+        }
+    ]
 }
 
 # AssistantAgent: the LLM-backed agent that generates responses
