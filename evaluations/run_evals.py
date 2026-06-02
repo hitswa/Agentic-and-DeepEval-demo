@@ -8,6 +8,18 @@ from __future__ import annotations
 #   2. run_tool_metrics()  — scores individual tool calls using
 #      ToolCorrectness and ArgumentCorrectness metrics.
 
+import os
+
+from dotenv import load_dotenv
+
+# Route DeepEval's internal OpenAI calls (LLM-as-judge metrics) through the
+# Azure OpenAI endpoint.  Must be done before importing deepeval metrics.
+load_dotenv()
+os.environ.setdefault("OPENAI_API_KEY", os.getenv("AZURE_OPENAI_API_KEY", ""))
+_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
+if _endpoint:
+    os.environ.setdefault("OPENAI_BASE_URL", f"{_endpoint}/openai/v1/")
+
 from typing import List
 
 from deepeval.dataset import EvaluationDataset, Golden

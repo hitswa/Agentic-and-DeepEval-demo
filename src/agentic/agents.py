@@ -20,18 +20,35 @@ from .trace import AgentRunTrace, ToolTrace, TraceRecorder
 def _build_llm_config() -> dict:
     """Load environment variables and return the AutoGen LLM configuration dict.
 
-    Reads OPENAI_API_KEY (required) and OPENAI_MODEL (optional, defaults to gpt-4o-mini)
-    from the .env file or the shell environment.
+    Reads the following variables from the .env file or the shell environment:
+      AZURE_OPENAI_API_KEY   (required) – Azure OpenAI resource key.
+      AZURE_OPENAI_ENDPOINT  (required) – e.g. https://<resource>.openai.azure.com/
+      AZURE_OPENAI_DEPLOYMENT (optional) – deployment name, defaults to gpt-4o-mini.
+      AZURE_OPENAI_API_VERSION (optional) – API version, defaults to 2025-01-01-preview.
 
     Raises:
-        RuntimeError: If OPENAI_API_KEY is not set.
+        RuntimeError: If AZURE_OPENAI_API_KEY or AZURE_OPENAI_ENDPOINT is not set.
     """
     load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY")
-    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    api_key = os.getenv("AZURE_OPENAI_API_KEY")
+    endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4o-mini")
+    api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
     if not api_key:
-        raise RuntimeError("OPENAI_API_KEY is required in the environment.")
-    return {"model": model, "api_key": api_key}
+        raise RuntimeError("AZURE_OPENAI_API_KEY is required in the environment.")
+    if not endpoint:
+        raise RuntimeError("AZURE_OPENAI_ENDPOINT is required in the environment.")
+    return {
+        "config_list": [
+            {
+                "model": deployment,
+                "api_key": api_key,
+                "base_url": endpoint.rstrip("/") + "/",
+                "api_type": "azure",
+                "api_version": api_version,
+            }
+        ]
+    }
 
 
 def _build_trace_output(plan: List[str], steps: List[str], final_answer: str) -> str:
