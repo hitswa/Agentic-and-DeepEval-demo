@@ -6,9 +6,10 @@ from __future__ import annotations
 # capture the input, output, and tool calls automatically for metric scoring.
 
 import os
+from pathlib import Path
 from typing import List, Optional
 
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 import autogen
 from deepeval.tracing import observe, update_current_trace
@@ -21,30 +22,45 @@ def _build_llm_config() -> dict:
     """Load environment variables and return the AutoGen LLM configuration dict.
 
     Reads the following variables from the .env file or the shell environment:
-      AZURE_OPENAI_API_KEY   (required) – Azure OpenAI resource key.
-      AZURE_OPENAI_ENDPOINT  (required) – e.g. https://<resource>.openai.azure.com/
-      AZURE_OPENAI_DEPLOYMENT (optional) – deployment name, defaults to gpt-4o-mini.
-      AZURE_OPENAI_API_VERSION (optional) – API version, defaults to 2025-01-01-preview.
+      OPENAI_API_TYPE        (optional) - defaults to azure.
+      AZURE_OPENAI_API_KEY   (required) - Azure OpenAI resource key.
+      AZURE_OPENAI_ENDPOINT  (required) - e.g. https://<resource>.openai.azure.com/
+      AZURE_OPENAI_DEPLOYMENT (optional) - deployment name, defaults to gpt-4o-mini.
+      AZURE_OPENAI_API_VERSION (optional) - API version, defaults to 2025-01-01-preview.
 
     Raises:
         RuntimeError: If AZURE_OPENAI_API_KEY or AZURE_OPENAI_ENDPOINT is not set.
     """
-    load_dotenv()
+    # Load .env from repository root first, then fall back to dotenv's discovery.
+    repo_root = Path(__file__).resolve().parents[2]
+    env_file = repo_root / ".env"
+    if env_file.exists():
+        load_dotenv(dotenv_path=env_file, override=True)
+    else:
+        load_dotenv(find_dotenv(), override=True)
+
     api_key = os.getenv("AZURE_OPENAI_API_KEY")
     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    api_type = os.getenv("OPENAI_API_TYPE", "azure")
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4o-mini")
     api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
     if not api_key:
-        raise RuntimeError("AZURE_OPENAI_API_KEY is required in the environment.")
+        raise RuntimeError(
+            "AZURE_OPENAI_API_KEY is required in the environment. "
+            f"Expected .env at: {env_file}"
+        )
     if not endpoint:
-        raise RuntimeError("AZURE_OPENAI_ENDPOINT is required in the environment.")
+        raise RuntimeError(
+            "AZURE_OPENAI_ENDPOINT is required in the environment. "
+            f"Expected .env at: {env_file}"
+        )
     return {
         "config_list": [
             {
                 "model": deployment,
                 "api_key": api_key,
                 "base_url": endpoint.rstrip("/") + "/",
-                "api_type": "azure",
+                "api_type": api_type,
                 "api_version": api_version,
             }
         ]
